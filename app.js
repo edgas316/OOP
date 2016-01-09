@@ -194,7 +194,7 @@ sayMessage("Hello")// Hi There
 // But we can do this
 
 function sayHi(message){
-    if(message == undefined){
+    if(!message || message == undefined){
         message = "Hello World"
     }
     //or
@@ -245,28 +245,30 @@ var pers2 = {
     name:'Marlen'
 }
 // The call() method
+// If you just have individual variables, use call()
 sayNameForAll2.call(this, "global call() method") // global:David Gasparian
 sayNameForAll2.call(pers1, "pers1 call() method") // pers1:Greg
 sayNameForAll2.call(pers2, "pers2 call() method")// pers2:Marlen
 
 // The apply() method
+// If you already have an array of data, use apply()
 sayNameForAll2.apply(this, ["Global apply() method"])
 sayNameForAll2.apply(pers1, ["pers1 apply() method"])
 sayNameForAll2.apply(pers2, ["pers2 apply() method"])
-//The method you use typically
-//depends on the type of data you have. If you already have an array of
-//data, use apply(); if you just have individual variables, use call().
+//The method you use typically depends on the type of data you have. 
+// If you already have an array of data, use apply() 
+// If you just have individual variables, use call()
 
 // The bind() method
 // Way 1
-// No parameters are bound for sayNameForPers1() u, so you still need
+// No parameters are bound for sayNameForPers1(), so you still need
 // to pass in the label for the output.
 var sayNameForPers1 = sayNameForAll2.bind(pers1)
 sayNameForPers1("pers1 bind() method way 1")    // pers1 bind() method way 1:Greg
 
 // Way 2
-// The function sayNameForPers2() not
-// only binds this to pers2 but also binds the first parameter as "pers2"
+// The function sayNameForPers2() not only binds this to pers2 
+// but also binds the first parameter as "pers2"
 // That means you can call sayNameForPers2()
 // without passing in any additional arguments.
 var sayNameForPers2 = sayNameForAll2.bind(pers2, "pers2 bind() method way 2")
@@ -274,12 +276,13 @@ sayNameForPers2()                               // pers2 bind() method way 2:Mar
 
 // attaching a method to an object doesn't change 'this'
 pers2.sayName = sayNameForPers1
-pers2.sayName("pers2 with added method")        // pers2 with added method:Greg
+pers2.sayName("pers2 with added method from pers1")        // pers2 with added method from pers1:Greg
 pers2.sayName()                                 // undefined:Greg
 
 pers2.sayName = sayNameForPers2
 pers2.sayName()                                 //pers2 bind() method way 2:Marlen
 pers2.sayName("pers2 with added method")        //pers2 bind() method way 2:Marlen
+
 
 
 
