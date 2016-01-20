@@ -135,14 +135,188 @@ function MyConstructor(){
     // initialization
 }
 // Javascript engine does this...
-MyConstructor1.prototype = Object.create(Object.prototype, {
+MyConstructor.prototype = Object.create(Object.prototype, {
     constructor:{
         configurable:true,
         enumerable:true,
-        value:MyConstructor1,
+        value:MyConstructor,
         writable:true
     }
 })
 // YourConstructor is a subtype of Object, 
 // and Object is a supertype of MyConstructor.
+
+// Because the prototype property is writable, you can change the prototype
+// chain by overwriting it.
+function Rectangle(length, width){
+    this.length = length
+    this.width = width
+}
+
+Rectangle.prototype.getArea = function(){
+    return this.length * this.width
+}
+
+Rectangle.prototype.toString = function(){
+    return "[Rectangle "+ this.length + "x"+ this.width+ "]"
+}
+
+// Inherits from Rectangle construvtor to create new Conctructor
+function Square(size){
+    this.length = size
+    this.width = size
+}
+
+Square.prototype = new Rectangle()
+Square.prototype.constructor = Square
+
+Square.prototype.toString = function(){
+    return "[Square " +this.length+"x"+this.width +"]"
+}
+
+var rect = new Rectangle(5,4)
+var square = new Square(6)
+
+console.log(rect.getArea())// 20
+console.log(square.getArea())// 36
+console.log(rect.toString())// [Rectangle 5x4]
+console.log(square.toString())// [Square 6x6]
+console.log(rect instanceof Rectangle)// true
+console.log(rect instanceof Object)// true
+console.log(square instanceof Square)// true
+console.log(square instanceof Rectangle)// true
+console.log(square instanceof Object)// true
+console.log(Rectangle.prototype.isPrototypeOf(Square.prototype))// true
+
+function SquareTwo(size){
+    this.length = size
+    this.width =  size
+}
+
+SquareTwo.prototype = Object.create(Rectangle.prototype, {
+    constructor:{
+        configurable:true,
+        enumerable:true,
+        value:SquareTwo,
+        writable:true
+    }
+})
+
+SquareTwo.prototype.toString = function(){
+    return "[SquareTwo " +this.length+"x"+this.width +"]"
+}
+
+var squareTwo = new SquareTwo(8)
+console.log(squareTwo.toString())// [Square 6x6]
+console.log(squareTwo.getArea())
+// In this version of the code, SquareTwo.prototype is overwritten with a
+// new object that inherits from Rectangle.prototype, and the Rectangle
+// constructor is never called. That means you don’t need to worry about
+// causing an error by calling the constructor without arguments anymore.
+// Otherwise, this code behaves exactly the same as the previous code. The
+// prototype chain remains intact, so all instances of Square inherit from
+// Rectangle.prototype and the constructor is restored in the same step.
+// NOT E Always make sure that you overwrite the prototype before adding properties to it,
+// or you will lose the added methods when the overwrite happens.
+
+
+// === Constructor Stealing ===
+function RectSteal(length, width){
+    this.length = length
+    this.width = width
+}
+
+RectSteal.prototype.getArea = function(){
+    return this.length * this.width
+}
+
+RectSteal.prototype.toString = function(){
+    return "[RectSteal " +this.length+"x"+this.width +"]"
+}
+
+// inherits from RectSteal
+function SquareSteal(size){
+    RectSteal.call(this, size, size)
+    // optional: add new properties or oevrride existing ones here
+}
+
+SquareSteal.prototype = Object.create(RectSteal.prototype, {
+    constructor:{
+        configurable:true,
+        enumerable:true,
+        value:SquareSteal,
+        writable:true
+    }
+})
+
+SquareSteal.prototype.toString = function(){
+    return "[Rectangle " + this.length + "x" + this.width + "]";
+}
+
+var sqSteal = new SquareSteal(9)
+console.log(sqSteal.toString())
+
+// Accessing Supertype Methods
+// call the wupertupe method
+function R(length, width) {
+    this.length = length;
+    this.width = width;
+}
+R.prototype.getArea = function() {
+    return this.length * this.width;
+};
+R.prototype.toString = function() {
+    return "[Rectangle " + this.length + "x" + this.width + "]";
+};
+// inherits from Rectangle
+function S(size) {
+    R.call(this, size, size);
+}
+S.prototype = Object.create(R.prototype, {
+    constructor: {
+        configurable: true,
+        enumerable: true,
+        value: Square,
+        writable: true
+    }
+});
+// call the supertype method
+S.prototype.toString = function() {
+    var text = R.prototype.toString.call(this);
+    return text.replace("Rectangle", "Square");
+};
+var t = new S(5)
+console.log(t.toString())
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
