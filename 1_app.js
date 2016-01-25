@@ -1,58 +1,58 @@
 var name = "Edwin Gasparian"
-console.log(name.toLowerCase())
-console.log(name.charAt(0))
-console.log(name.substring(0, 8))
+console.log(name.toLowerCase())// edwin gasparian
+console.log(name.charAt(0))// E
+console.log(name.substring(0, 8))// Edwin Ga
 
 var count = 10
-console.log(count.toFixed(2))
-console.log(count.toString(16))
+console.log(count.toFixed(2))// 10.00
+console.log(count.toString(16))// a
 
 var flag = true
-console.log(flag)
-console.log(flag.toString())
+console.log(flag)// true
+console.log(flag.toString())// true
 //===================================
 var object1 = new Object()
-console.log(object1)
+console.log(object1)// Object{}
 var object2 = object1
-console.log(object2)
+console.log(object2)// Object{}
 object1 = null // dereferencing the object
-console.log(object1 + " " + object2)
+console.log(object1 + " " + object2)// null [object Object]
 object1 = object2
-console.log(object1 + " " + object2)
+console.log(object1 + " " + object2)// [object Object] [object Object]
 object2.mycustomPropertiy = "Awesome"
-console.log(object1.mycustomPropertiy)
+console.log(object1.mycustomPropertiy)// Awesome
 
-console.log(new Array())
-console.log(new Date())
-console.log(new Error("something went wrong"))
-console.log(new Function("console.log('Hi')"))
-console.log(new Object())
-console.log(new RegExp("\\d+"))
+console.log(new Array())// []
+console.log(new Date())// Fri Jan 22 2016 16:25:03 GMT-0800 (Pacific Standard Time)
+console.log(new Error("something went wrong"))// Error:j something went wrong at http://127.0.0.1:56914/1_app.js:27:13
+console.log(new Function("console.log('Hi')"))// function anonymous() {console.log('Hi')}
+console.log(new Object())// Object {}
+console.log(new RegExp("\\d+"))// /\d+/
 
 // Object literals
 var book = {
     name:"Javascript your best friend",
     year:2014 
 }
-console.log(book)
+console.log(book)// Object {name: "Javascript your best friend", year: 2014}
 //or
 var book1 = {
     "name":"javascript definitive guide",
     "year":2014
 }
-console.log(book1)
+console.log(book1)// Object {name: "Javascript your best friend", year: 2014}
 //or
 var book2 = new Object()
 book2.name = "The principles of OOP in Javascript"
 book2.year = 2014
-console.log(book2)
+console.log(book2)// Object {name: "The principles of OOP in Javascript", year: 2014}
 
 //array literals
 var color = ["red", "blue", "yellow", "black"]
-console.log(color[0])
+console.log(color[0])// red
 //or
 var color2 = new Array("red", "blue", "yellow", "black")
-console.log(color2[2])
+console.log(color2[2])// yellow
 console.log(typeof color2)// object
 console.log(color2 instanceof Array) // true
 
@@ -64,22 +64,22 @@ var numbers2 = new RegExp("\\d+", "g")
 //property access
 var array = []
 array.push(1234)
-console.log(array)
-console.log(array instanceof Array)
+console.log(array)// [1234]
+console.log(array instanceof Array)// true
 //or
 var array1 = []
 array1["push"](2345)
-console.log(array1)
+console.log(array1)// [2345]
 //or
 var array2 = []
 var method = "push"
 array2[method](9876)
-console.log(array2)
+console.log(array2)// [9876]
 
 //identifying arrays
 var items = []
-console.log(items instanceof Array)
-console.log(Array.isArray(items))
+console.log(items instanceof Array)// true
+console.log(Array.isArray(items))// true
 
 //primitive wrapper types (String, Number, and Boolean)
 var firstName = "Edwin"
@@ -156,15 +156,15 @@ console.log(number2)//[1, 10, 2, 4, 5, 6, 7, 8]
 var reflectArguments = function(){
     return arguments
 }
-console.log(reflectArguments("hello Argument", 12, 54,83))
-console.log(reflectArguments.length)
+console.log(reflectArguments("hello Argument", 12, 54,83))// ["hello Argument", 12, 54, 83]
+console.log(reflectArguments.length)// 0 // Because it refers to reflectArguments(){...} and i's empty...
 //or
 function reflect(value){
     return value
 }
-console.log(reflect("Hi there"))
-console.log(reflect.length)
-console.log(reflect("Hi", 25,"by", 23,65,98))
+console.log(reflect("Hi there"))// Hi there
+console.log(reflect.length)// 1
+console.log(reflect("Hi", 25,"by", 23,65,98))// Hi
 //this aproach (passing the agrument to the function) is more useful 
 
 //unless the quantity of argumets to be used are unknown
@@ -181,7 +181,6 @@ function sum(){
 console.log(sum(4,5,7,2,6,8,94,34))
 
 // Overloading
-
 function sayMessage(message){
     console.log(message)
 }
@@ -195,27 +194,26 @@ sayMessage("Hello")// Hi There
 
 function sayHi(message){
     if(!message || message == undefined){
-        message = "Hello World"
+        message = "Hello World_1"
     }
     //or
-//    if(parametes.length === 0){
-//        message = "Hello World"
-//    }
+    if(arguments.length === 0){
+        message = "Hello World_2"
+    }
     console.log(message)
 }
 sayHi("Tis is my message")// This is my message
-sayHi()// Hello World
+sayHi()// Hello World_2
 
 // Object Methods
-
 var person = {
     name: "Edwin Gasparian",
     sayName: function(){
         console.log(person.name)
     }
 }
-person.sayName()
-console.log(person.name + " is your name")
+person.sayName()// Edwin Gasparian
+console.log(person.name + " is your name")// Edwin Gasparian is your name
 
 //===this=== Object
 function sayNameForAll(){
@@ -246,9 +244,9 @@ var pers2 = {
 }
 // The call() method
 // If you just have individual variables, use call()
-sayNameForAll2.call(this, "global call() method") // global:David Gasparian
-sayNameForAll2.call(pers1, "pers1 call() method") // pers1:Greg
-sayNameForAll2.call(pers2, "pers2 call() method")// pers2:Marlen
+sayNameForAll2.call(this, "global call() method")   // global call() method:David Gasparian
+sayNameForAll2.call(pers1, "pers1 call() method")   // pers1 call() method:Greg
+sayNameForAll2.call(pers2, "pers2 call() method")   // pers2 call() method:Marlen
 
 // The apply() method
 // If you already have an array of data, use apply()
@@ -276,12 +274,12 @@ sayNameForPers2()                               // pers2 bind() method way 2:Mar
 
 // attaching a method to an object doesn't change 'this'
 pers2.sayName = sayNameForPers1
-pers2.sayName("pers2 with added method from pers1")        // pers2 with added method from pers1:Greg
-pers2.sayName()                                 // undefined:Greg
+pers2.sayName("pers2 with added method from pers1") // pers2 with added method from pers1:Greg
+pers2.sayName()                                     // undefined:Greg
 
 pers2.sayName = sayNameForPers2
-pers2.sayName()                                 //pers2 bind() method way 2:Marlen
-pers2.sayName("pers2 with added method")        //pers2 bind() method way 2:Marlen
+pers2.sayName()                                     //pers2 bind() method way 2:Marlen
+pers2.sayName("pers2 with added method")            //pers2 bind() method way 2:Marlen
 
 
 
