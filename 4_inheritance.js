@@ -1,5 +1,5 @@
 // Prototype Chaining and Object.prototype
-// Prototype chainint or prototypal inheritsnce
+// Prototype chaining or prototypal inheritsnce
 var book = {
     title: "Object Oriented Javascript"
 }
@@ -126,9 +126,10 @@ person2.sayName()// this is your name TIm
 console.log(person1.hasOwnProperty("sayName"))// true
 console.log(person1.isPrototypeOf(person2))// true
 console.log(person2.hasOwnProperty("sayName"))// false
-console.log(person2)
-console.log(person3)
-console.log(person3.name + " "+ person3.sayName())
+console.log(person2)// Object {name: "Tim"}
+console.log(person3)// Object {}
+console.log(person3.name + " "+ person3.sayName())  // this is your name Edwin
+                                                    // Edwin this is your name Edwin
 
 // === Constructor Inheritance ===
 function MyConstructor(){
@@ -161,7 +162,7 @@ Rectangle.prototype.toString = function(){
     return "[Rectangle "+ this.length + "x"+ this.width+ "]"
 }
 
-// Inherits from Rectangle construvtor to create new Conctructor
+// Inherits from Rectangle constructor to create new Conctructor
 function Square(size){
     this.length = size
     this.width = size

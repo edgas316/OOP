@@ -181,7 +181,7 @@ Array.prototype.sum = function(){
 var numbers = [1,2,3,4,5,6,7]
 var result = numbers.sum()
 console.log(result)
-// While it is good to know how you can manipulate t uilt-in objects
+// While it is good to know how you can manipulate built-in objects
 // It is NOT really good idea to change them in production environment...!!!
 // Developers expect built-in objects to behave a certain way and have certain methods.
 // Deliberately altering built-in objects violates those expectations 
