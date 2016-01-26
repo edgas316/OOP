@@ -61,6 +61,9 @@ var properties = Object.keys(object)
 // for loop
 var i, len
 for(i=0, len=properties.length; i<len; i++){
+    console.log(i)// accessing to the index of the property in the object...0,1,2,3
+    console.log(properties[i])// accesses to key in object property
+    console.log(object[properties[i]])// accesses to value in object property
     console.log("Name - "+properties[i])
     console.log("Value - " + object[properties[i]])
 }
@@ -87,11 +90,11 @@ var acsProp = {
     get name(){ // getter or reader
         console.log("Reading name");
         return this._name;
-    }, // if no setter then property becomes read only
+    }, // if no getter then property becomes write only
     set name(value) { // setter - setting new value to the name ppoperty
         console.log("Setting name to %s", value);
         this._name = value
-    } // if no getter then property becomes write only
+    } // if no setter then property becomes read only
 }
 
 console.log(acsProp.name);// "Reading name" then "New Name"
@@ -158,7 +161,7 @@ delete prop.age
 console.log("age" in prop)// true
 prop.age = "Adult"
 console.log(prop.age)// toddler
-// In this code, you can’t do anything with the name property except read the value; 
+// In this code, you can’t do anything with the age property except read the value; 
 // every other operation is locked down.
 
 // == Accessor Property Attributes ==
@@ -247,7 +250,7 @@ Object.defineProperties(multProp, {
         enumerable:true
     }
 })
-console.log(multProp)
+console.log(multProp)// Object {_name: "Edwin Gasparian", _age: "toddler"}
 
 // === Retrieving Property Attributes === 
 
