@@ -120,7 +120,7 @@ function mixin(receiver, supplier){
     }
     return receiver
 }
-//Here, mixin() checks whether Object.getOwnPropertyDescriptor() u exists
+//Here, mixin() checks whether Object.getOwnPropertyDescriptor() exists
 //to determine whether the JavaScript engine supports ECMAScript
 //If so, it goes on to use the ECMAScript 5 version. Otherwise, the ECMAScript
 //version is used. This function is safe to use in both modern and legacy
@@ -130,14 +130,14 @@ function mixin(receiver, supplier){
 var person = mixin(new EventTarget(), {
     get name(){
         return "Edwin"
-    },
+    },// read only...
     sayName:function(){
         console.log(this.name)
         this.fire({type:"namesaid", name:name})
     }
 })
 console.log(person.name)// Edwin
-person.name = "Greg"
+person.name = "Greg"// can't change the value of name property
 console.log(person.name)// Edwin
 console.log(person.sayName())
 
