@@ -15,10 +15,10 @@ console.log(name)// Edwin // is gloval variable...
 // ==========================================================
 // A Scope-Safe version of Person looks like this:
 function PersonSafe(name){
-    if(this instanceof PersonSafe){
+    if(this instanceof PersonSafe){ // if new object was created with "new" keyword...
         this.name = name
     }else{
-        return new PersonSafe(name)
+        return new PersonSafe(name) // if new object was created without "new" keyword...
     }
 }
 
