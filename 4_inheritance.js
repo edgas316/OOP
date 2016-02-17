@@ -258,7 +258,7 @@ var sqSteal = new SquareSteal(9)
 console.log(sqSteal.toString())
 
 // Accessing Supertype Methods
-// call the wupertupe method
+// call the supertupe method
 function R(length, width) {
     this.length = length;
     this.width = width;
